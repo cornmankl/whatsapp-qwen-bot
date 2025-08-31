@@ -1,0 +1,26 @@
+<!-- views/index.html -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Qwen WhatsApp Bot</title>
+  <link rel="stylesheet" href="/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>📊 Qwen WhatsApp Bot Dashboard</h1>
+      <a href="/logout">Logout</a>
+    </header>
+    <canvas id="logChart" width="400" height="100"></canvas>
+    <table id="logTable">
+      <thead>
+        <tr><th>Masa</th><th>Dari</th><th>Mesej</th><th>Balasan</th></tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <script src="/script.js"></script>
+</body>
+</html>
