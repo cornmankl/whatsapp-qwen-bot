@@ -1,5 +1,8 @@
 # 🤖 WhatsApp Bot dengan Qwen AI
 
+[![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/new/template?template=https%3A%2F%2Fgithub.com%2Fcornmankl%2Fwhatsapp-qwen-bot)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 Projek ini membangunkan **bot WhatsApp pintar** yang menggunakan **model Qwen AI** untuk berinteraksi secara automatik dalam peribadi mahupun kumpulan.
 
 ---
@@ -58,6 +61,60 @@ Atau:
   - `hello`
   - `!help`
   - `!ping`
+
+---
+
+## 💻 Development di Local
+
+### Prasyarat
+
+- Node.js >= 16
+- Python >= 3.8
+- MongoDB (lokal atau cloud)
+
+### Langkah Setup
+
+```bash
+git clone https://github.com/cornmankl/whatsapp-qwen-bot
+cd whatsapp-qwen-bot
+
+# Install dependencies
+npm install
+pip install -r requirements.txt
+
+# Jalankan bot
+node bot.js
+```
+
+---
+
+## 🐳 Docker Compose untuk Test Local
+
+Cipta fail `docker-compose.yml`:
+
+```yaml
+version: '3'
+services:
+  bot:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - MONGO_URI=mongodb://mongo:27017
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo
+    ports:
+      - "27017:27017"
+```
+
+Jalankan:
+
+```bash
+docker-compose up
+```
 
 ---
 
