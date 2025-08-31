@@ -45,15 +45,27 @@ client.on('qr', qr => {
     qrcode.generate(qr, { small: true });
 });
 
+function startBot() {
+    client.initialize();
+}
+
 client.on('ready', async () => {
     console.log('✅ Bot WhatsApp Dah Sedia!');
     await sendTelegram('✅ Bot WhatsApp telah sedia!');
 });
 
-client.on('disconnected', async () => {
-    console.log('🔴 Bot terputus!');
-    await sendTelegram('🔴 Bot WhatsApp terputus!');
+client.on('disconnected', (reason) => {
+    console.log('🔴 Bot terputus:', reason);
+    sendTelegram(`🔴 Bot WhatsApp terputus: ${reason}`);
+    setTimeout(startBot, 5000);
 });
+
+client.on('auth_failure', (msg) => {
+    console.error('❌ Auth gagal:', msg);
+    sendTelegram('❌ Auth gagal. Sila scan QR semula.');
+});
+
+startBot(); // mulakan bot
 
 // Abaikan user tertentu
 const ignoredUsers = ['60123456789@c.us'];

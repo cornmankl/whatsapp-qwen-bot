@@ -31,6 +31,13 @@ document.addEventListener('DOMContentLoaded', async () => {
                 borderColor: 'rgba(54, 162, 235, 1)',
                 borderWidth: 1
             }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
         }
     });
 });
