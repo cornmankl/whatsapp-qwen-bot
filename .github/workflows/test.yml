@@ -1,0 +1,32 @@
+# .github/workflows/test.yml
+name: Test & Deploy
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      - name: Install dependencies
+        run: npm install
+      - name: Run tests
+        run: npm test
+
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - name: Deploy to Railway
+        run: |
+          curl -X POST https://railway.app/api/projects/326a0141-7315-4dd6-aeac-78c5e8e5c8a7/services/deploy \
+            -H "Authorization: Bearer ${{ secrets.RAILWAY_TOKEN }}"
